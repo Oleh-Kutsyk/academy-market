@@ -167,7 +167,6 @@ module.exports = {
     'array-callback-return': 'error', // enforce return statements in callbacks of array methods
     'block-scoped-var': 'error', // enforce the use of variables within the scope they are defined
     'class-methods-use-this': 'off', // enforce that class methods utilize this (can be warn)
-    'consistent-return': 'warn', // require return statements to either always or never specify values
     'default-case': 'error', // require default cases in switch statements
     'default-case-last': 'error', // enforce default clauses in switch statements to be last
     'default-param-last': 'error', // enforce default parameters to be last
