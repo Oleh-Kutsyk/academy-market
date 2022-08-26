@@ -1,28 +1,28 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { ILoginBody, loginApi } from '../../../api';
 
 export interface IAuth {
   isAuth: boolean;
   isAuthChecked: boolean;
   token: string | null;
+  isLoading?: boolean;
+  error?: string;
 }
 
 const initialState: IAuth = {
   isAuth: false,
   isAuthChecked: false,
   token: null,
+  isLoading: false,
+  error: '',
 };
 
-interface ILoginReq {
-  username: string;
-  password: string;
-}
-
-export const login = createAsyncThunk<string, ILoginReq>(
+export const loginThunk = createAsyncThunk<string, ILoginBody>(
   'auth/login',
-  async ({ username, password }) => {
-    console.log('username', username);
-    console.log('password', password);
-    return ' token';
+  async body => {
+    const res = await loginApi(body);
+    localStorage.setItem('token', res.token);
+    return res.token;
   }
 );
 
@@ -38,20 +38,24 @@ export const authSlice = createSlice({
   },
   extraReducers: builder => {
     // Add reducers for additional action types here, and handle loading state as needed
-    builder.addCase(login.fulfilled, state => {
-      state.isAuth = true;
-      state.isAuthChecked = true;
-      state.token = 'token';
+    builder.addCase(
+      loginThunk.fulfilled,
+      (state, { payload }: PayloadAction<string>) => {
+        state.isAuth = true;
+        state.isAuthChecked = true;
+        state.token = payload;
+        state.isLoading = false;
+      }
+    );
+    builder.addCase(loginThunk.pending, state => {
+      state.isLoading = true;
     });
-    builder.addCase(login.pending, state => {
-      state.isAuth = true;
+    builder.addCase(loginThunk.rejected, (state, action) => {
+      state.isAuth = false;
       state.isAuthChecked = true;
-      state.token = 'token';
-    });
-    builder.addCase(login.rejected, state => {
-      state.isAuth = true;
-      state.isAuthChecked = true;
-      state.token = 'token';
+      state.token = null;
+      state.isLoading = false;
+      state.error = action.error.message;
     });
   },
 });

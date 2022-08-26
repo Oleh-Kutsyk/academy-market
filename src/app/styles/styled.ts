@@ -6,14 +6,14 @@ export const GlobalStyles = createGlobalStyle`
   .root {
     height: 100%;
     min-height: 100%;
-    font-size: 10px;
+    font-size: 14px;
   }
 
   body {
     background-color: #E5E5E5;
     height: auto;
     min-height: auto;
-
+    margin: 0;
   }
 
   .hidden {

@@ -5,7 +5,7 @@ import { MainLayout } from '../../../scenes/layouts';
 import {
   AllProducts,
   CreateProduct,
-  Dashboard,
+  Main,
   EditProduct,
 } from '../../../scenes/pages/main';
 
@@ -19,9 +19,9 @@ export const mainRoutes: ICustomRouteObject[] = [
       {
         id: `mainRoutes_2`,
         index: true,
-        path: ROUTES.main.dashboard,
+        path: ROUTES.main.root,
         routeType: ERouteType.Public,
-        element: <Dashboard />,
+        element: <Main />,
       },
       {
         id: `mainRoutes_3`,

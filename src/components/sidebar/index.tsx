@@ -1,112 +1,64 @@
-import React, { useState } from 'react';
-import { observer } from 'mobx-react-lite';
-import { sidebarMenu, ISideBarMenuItem } from '../../constants/sidebarMenu';
-import * as Styled from './styled';
-import { Box } from '@mui/material';
-import { Icon } from '../icon';
-import { TIconsName } from '../../assets/icons';
-import { useMst } from '../../stores';
-import { AdminCard } from './components';
-import { Button } from '../button';
+import * as React from 'react';
+import Box from '@mui/material/Box';
+import Drawer from '@mui/material/Drawer';
+import List from '@mui/material/List';
+import Divider from '@mui/material/Divider';
+import IconButton from '@mui/material/IconButton';
+import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
+import ListItem from '@mui/material/ListItem';
+import ListItemButton from '@mui/material/ListItemButton';
+import ListItemIcon from '@mui/material/ListItemIcon';
+import ListItemText from '@mui/material/ListItemText';
+import InboxIcon from '@mui/icons-material/MoveToInbox';
+import MailIcon from '@mui/icons-material/Mail';
+import { useDispatch, useSelector } from 'react-redux';
+import { handleSideBar, TRootState } from '../../stores';
+import { DrawerHeader } from './styled';
+import { Typography } from '@mui/material';
 
-interface ISidebar {
-  open: boolean;
-  onClose: () => void;
-}
+const drawerWidth = 240;
 
-export const SideBar: React.FC<ISidebar> = observer(({ open, onClose }) => {
-  const store = useMst();
-  const [isOpen, setIsOpen] = useState(false);
+export const Sidebar = () => {
+  const dispatch = useDispatch();
+  const isOpen = useSelector(({ app }: TRootState) => app.isSideBarOpen);
 
-  const selectedItemId = store.ui.sidebar.selectedItemId;
-  const brands = store.app.brand.list;
-  const currentBrand = store.app.brand.getCurrentBrandTitle();
-
-  const handleSelectSideBarItem = (id: string) => () => {
-    store.ui.sidebar.select(id);
-  };
-
-  const renderItem = (sidebarItems: Array<ISideBarMenuItem>) => {
-    return sidebarItems.map(item => {
-      const isActive = item.id === selectedItemId;
-      return (
-        <Styled.ListItem key={item.id}>
-          {item.hasDropDown ? (
-            <Styled.DropDownContainer>
-              <Styled.ListItemButton onClick={handleSelectSideBarItem(item.id)}>
-                {!!item.iconType && (
-                  <Icon
-                    iconType={item.iconType as TIconsName}
-                    stroke={isActive ? '#FFF' : '#66A0FA'}
-                  />
-                )}
-                <Styled.MenuItemTitle isActive={isActive}>
-                  {item.title}
-                </Styled.MenuItemTitle>
-              </Styled.ListItemButton>
-              {isActive && item.children?.length && renderItem(item.children)}
-            </Styled.DropDownContainer>
-          ) : (
-            <Styled.NavLink to={item.link as string}>
-              {!!item.iconType && (
-                <Icon iconType={item.iconType as TIconsName} />
-              )}
-              {item.title}
-            </Styled.NavLink>
-          )}
-        </Styled.ListItem>
-      );
-    });
+  const handleDrawerClose = () => {
+    dispatch(handleSideBar());
   };
 
   return (
-    <Styled.Drawer
-      variant='persistent'
-      anchor='left'
-      open={open}
-      onClose={onClose}
-    >
-      <Styled.DrawerHeader>
-        <Box>
-          <Styled.Title>AMPM</Styled.Title>
-          <Styled.SubTitle>App Management & Parameters Mapping</Styled.SubTitle>
-        </Box>
-        <Styled.CloseSideMenu color='secondary' onClick={onClose}>
-          <Icon iconType={'openSideBar'} />
-        </Styled.CloseSideMenu>
-      </Styled.DrawerHeader>
-      <Styled.DrawerBrand>
-        <Styled.Brand>{currentBrand}</Styled.Brand>
-        <Styled.ChooseBrand
-          color='secondary'
-          onClick={() => {
-            setIsOpen(!isOpen);
-          }}
-        >
-          <Icon iconType='iconArrowDown' />
-        </Styled.ChooseBrand>
-      </Styled.DrawerBrand>
-      {isOpen && (
-        <Styled.Brands>
-          {brands.map(b => (
-            <Button
-              color='inherit'
-              key={b.title}
-              onClick={() => {
-                store.app.brand.changeBrand(b.value);
-              }}
-            >
-              {b.title}
-            </Button>
+    <Box sx={{ display: 'flex' }}>
+      <Drawer
+        sx={{
+          width: drawerWidth,
+          '& .MuiDrawer-paper': {
+            width: drawerWidth,
+          },
+        }}
+        variant='persistent'
+        anchor='left'
+        open={isOpen}
+      >
+        <DrawerHeader>
+          <Typography>Menu</Typography>
+          <IconButton onClick={handleDrawerClose}>
+            <ChevronLeftIcon />
+          </IconButton>
+        </DrawerHeader>
+        <Divider />
+        <List>
+          {['Products', 'Categories'].map((text, index) => (
+            <ListItem key={text} disablePadding>
+              <ListItemButton>
+                <ListItemIcon>
+                  {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+                </ListItemIcon>
+                <ListItemText primary={text} />
+              </ListItemButton>
+            </ListItem>
           ))}
-        </Styled.Brands>
-      )}
-      <Styled.ListWrapper>
-        <Styled.Box>
-          <Styled.List>{renderItem(sidebarMenu)}</Styled.List>
-        </Styled.Box>
-      </Styled.ListWrapper>
-      <AdminCard />
-    </Styled.Drawer>
+        </List>
+      </Drawer>
+    </Box>
   );
-});
+};

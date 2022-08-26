@@ -1,5 +1,6 @@
 import React from 'react';
+import { AllProducts } from '../allProducts';
 
-export const Dashboard = () => {
-  return <div>Dashboadr</div>;
+export const Main = () => {
+  return <AllProducts />;
 };

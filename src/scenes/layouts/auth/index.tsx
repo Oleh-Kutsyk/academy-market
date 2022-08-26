@@ -1,11 +1,15 @@
 import React from 'react';
 import { Outlet } from 'react-router-dom';
+import { Main } from '../styled';
+import { Header } from '../../../components/header';
 
 export const AuthLayout = () => {
   return (
     <div>
-      <h1>AuthLayout</h1>
-      <Outlet />
+      <Header />
+      <Main>
+        <Outlet />
+      </Main>
     </div>
   );
 };

@@ -8,9 +8,6 @@ export const ROUTES = {
 
   main: {
     root: '/',
-
-    dashboard: '/dashboard',
-
     allProducts: '/all-products',
     createProduct: 'create',
     editProduct: ':id/edit',
