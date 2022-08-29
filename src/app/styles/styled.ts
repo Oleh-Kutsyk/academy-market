@@ -20,6 +20,21 @@ export const GlobalStyles = createGlobalStyle`
     display: none;
   }
 
+  .activeLink {
+    color: black;
+    text-decoration: none;
+    display: flex;
+    padding: 10px;
+  }
+
+  .link {
+    color: gray;
+    text-decoration: none;
+    display: flex;
+    padding: 10px;
+
+  }
+
   .image-svg-base,
   img {
     vertical-align: middle;

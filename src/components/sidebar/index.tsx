@@ -6,15 +6,17 @@ import Divider from '@mui/material/Divider';
 import IconButton from '@mui/material/IconButton';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ListItem from '@mui/material/ListItem';
-import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-import InboxIcon from '@mui/icons-material/MoveToInbox';
-import MailIcon from '@mui/icons-material/Mail';
+import ProductionQuantityLimitsIcon from '@mui/icons-material/ProductionQuantityLimits';
+import CategoryIcon from '@mui/icons-material/Category';
 import { useDispatch, useSelector } from 'react-redux';
 import { handleSideBar, TRootState } from '../../stores';
-import { DrawerHeader } from './styled';
 import { Typography } from '@mui/material';
+import { ROUTES } from '../../core/routes/routesPath';
+
+import * as Styled from './styled';
+import { NavLink } from 'react-router-dom';
 
 const drawerWidth = 240;
 
@@ -39,22 +41,23 @@ export const Sidebar = () => {
         anchor='left'
         open={isOpen}
       >
-        <DrawerHeader>
+        <Styled.DrawerHeader>
           <Typography>Menu</Typography>
           <IconButton onClick={handleDrawerClose}>
             <ChevronLeftIcon />
           </IconButton>
-        </DrawerHeader>
+        </Styled.DrawerHeader>
         <Divider />
         <List>
-          {['Products', 'Categories'].map((text, index) => (
-            <ListItem key={text} disablePadding>
-              <ListItemButton>
-                <ListItemIcon>
-                  {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-                </ListItemIcon>
-                <ListItemText primary={text} />
-              </ListItemButton>
+          {links.map(link => (
+            <ListItem key={link.id} disablePadding>
+              <NavLink
+                to={link.to}
+                className={({ isActive }) => (isActive ? 'activeLink' : 'link')}
+              >
+                <ListItemIcon>{link.icon}</ListItemIcon>
+                <ListItemText primary={link.title} />
+              </NavLink>
             </ListItem>
           ))}
         </List>
@@ -62,3 +65,18 @@ export const Sidebar = () => {
     </Box>
   );
 };
+
+const links = [
+  {
+    id: 'Products',
+    title: 'Products',
+    to: ROUTES.main.allProducts,
+    icon: <ProductionQuantityLimitsIcon />,
+  },
+  {
+    id: 'Categories',
+    title: 'Categories',
+    to: ROUTES.main.allCategories,
+    icon: <CategoryIcon />,
+  },
+] as const;

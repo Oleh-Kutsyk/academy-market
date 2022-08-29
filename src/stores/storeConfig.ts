@@ -1,10 +1,12 @@
 import { configureStore } from '@reduxjs/toolkit';
-import { app, auth } from './slices';
+import { app, auth, categories, products } from './slices';
 
 export const store = configureStore({
   reducer: {
     app,
     auth,
+    products,
+    categories,
   },
 });
 

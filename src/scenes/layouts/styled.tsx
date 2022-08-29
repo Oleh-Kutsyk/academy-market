@@ -9,8 +9,8 @@ export const Main = styled('main', {
 }>(({ theme, open }) => ({
   marginTop: 70,
   flexGrow: 1,
-  justifyContent: 'center',
   display: 'flex',
+  flexDirection: 'column',
   alignItems: 'center',
   height: 'calc(100vh - 134px)',
   padding: theme.spacing(3),

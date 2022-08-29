@@ -7,6 +7,7 @@ import {
   CreateProduct,
   Main,
   EditProduct,
+  AllCategories,
 } from '../../../scenes/pages/main';
 
 export const mainRoutes: ICustomRouteObject[] = [
@@ -42,6 +43,18 @@ export const mainRoutes: ICustomRouteObject[] = [
             element: <EditProduct />,
           },
         ],
+      },
+      {
+        id: `mainRoutes_6`,
+        path: ROUTES.main.allCategories,
+        routeType: ERouteType.Authorized,
+        element: <AllCategories />,
+      },
+      {
+        id: `mainRoutes_7`,
+        path: ROUTES.main.productsInCategory,
+        routeType: ERouteType.Authorized,
+        element: <AllProducts />,
       },
     ],
   },

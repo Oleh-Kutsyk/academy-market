@@ -12,6 +12,9 @@ export const ROUTES = {
     createProduct: 'create',
     editProduct: ':id/edit',
 
+    allCategories: '/all-categories',
+    productsInCategory: ':id/products',
+
     // bannerNotifications: '/banner-notifications',
     // createBannerNotification: 'create',
     // editBannerNotification: ':id/edit',
