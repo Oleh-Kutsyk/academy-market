@@ -8,6 +8,8 @@ import {
 } from '@mui/material';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
+import { useNavigate } from 'react-router-dom';
+import { ROUTES } from '../../../../core/routes/routesPath';
 
 const settings = ['Profile', 'Logout'];
 
@@ -16,6 +18,7 @@ interface IAvatar {
 }
 
 export const Avatar: React.FC<IAvatar> = ({ onLogin }) => {
+  const navigate = useNavigate();
   const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(
     null
   );
@@ -25,6 +28,9 @@ export const Avatar: React.FC<IAvatar> = ({ onLogin }) => {
   const handleCloseUserMenu = (type: string) => {
     if (type === 'Logout') {
       onLogin();
+    }
+    if (type === 'Profile') {
+      navigate(ROUTES.main.profile);
     }
     setAnchorElUser(null);
   };
