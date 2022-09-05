@@ -12,6 +12,7 @@ export const ROUTES = {
     profile: '/profile',
 
     allProducts: '/all-products',
+    productInfo: ':id/info',
     createProduct: 'create',
     editProduct: ':id/edit',
 

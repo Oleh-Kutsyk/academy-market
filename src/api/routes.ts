@@ -6,6 +6,6 @@ export const apiRoutes = {
   getProducts: `${baseUrl}/products`,
   getProductsInCategory: (category: string) =>
     `${baseUrl}/products/category/${category}`,
-  getSingleProduct: (id: string) => `${baseUrl}/products${id}`,
+  getSingleProduct: (id: string) => `${baseUrl}/products/${id}`,
   getCategories: `${baseUrl}/products/categories`,
 };

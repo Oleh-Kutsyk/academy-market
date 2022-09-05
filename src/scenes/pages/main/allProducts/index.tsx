@@ -9,10 +9,12 @@ import { Card } from '../../../../components/card';
 import { IProduct } from '../../../../api';
 
 import * as Styled from './styled';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
+import { ROUTES } from '../../../../core/routes/routesPath';
 
 export const AllProducts = () => {
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
   const params = useParams();
   const { products } = useAppSelector();
 
@@ -31,7 +33,7 @@ export const AllProducts = () => {
   }, []);
 
   const handleClick = (id: number) => () => {
-    console.log('id', id);
+    navigate(ROUTES.main.productInfo.replace(':id', id.toString()));
   };
 
   return (
