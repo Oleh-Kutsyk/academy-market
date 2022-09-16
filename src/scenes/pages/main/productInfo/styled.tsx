@@ -1,16 +1,20 @@
 import { styled } from '@mui/material/styles';
 import { Box, Typography } from '@mui/material';
 
-export const Root = styled(Box)(({ theme }) => ({
-  marginTop: theme.spacing(4),
+const marginRight32 = 4;
+const marginBottom16 = 2;
+
+export const Root = styled(Box)(() => ({
   display: 'flex',
+  justifyContent: 'flex-start',
+  alignItems: 'flex-start',
+  width: '100%',
 }));
 
 export const InfoContainer = styled(Box)(({ theme }) => ({
   display: 'flex',
   flexDirection: 'column',
-  padding: theme.spacing(1),
-  width: '50%',
+  margin: theme.spacing(0, marginRight32, marginBottom16, 0),
 }));
 
 export const Title = styled(Typography)(() => ({
@@ -21,10 +25,11 @@ export const Description = styled(Typography)(() => ({
   fontSize: 18,
 }));
 
-export const Image = styled(Box)(() => ({
+export const Image = styled(Box)(({ theme }) => ({
   display: 'flex',
   width: 400,
   height: 400,
   backgroundSize: 'contain',
   backgroundRepeat: 'no-repeat',
+  marginBottom: theme.spacing(marginBottom16),
 }));

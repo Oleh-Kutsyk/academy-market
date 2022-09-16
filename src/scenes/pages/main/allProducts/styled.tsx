@@ -1,8 +1,7 @@
 import { styled } from '@mui/material/styles';
 import { Box } from '@mui/material';
 
-export const Products = styled(Box)(({ theme }) => ({
-  marginTop: theme.spacing(4),
+export const Products = styled(Box)(() => ({
   display: 'flex',
   flexWrap: 'wrap',
   alignItems: 'flex-start',

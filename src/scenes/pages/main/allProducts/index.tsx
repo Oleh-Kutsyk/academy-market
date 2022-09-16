@@ -11,6 +11,7 @@ import { IProduct } from '../../../../api';
 import * as Styled from './styled';
 import { useNavigate, useParams } from 'react-router-dom';
 import { ROUTES } from '../../../../core/routes/routesPath';
+import { PageTitle } from '../../../../components/pageTitle';
 
 export const AllProducts = () => {
   const dispatch = useAppDispatch();
@@ -38,7 +39,7 @@ export const AllProducts = () => {
 
   return (
     <React.Fragment>
-      <h1>Products</h1>
+      <PageTitle title='Products' />
       <Styled.Products>
         {products.list.map((product: IProduct) => (
           <Card

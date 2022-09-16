@@ -5,6 +5,7 @@ import { Card } from '../../../../components/card';
 import Box from '@mui/material/Box';
 import { useNavigate } from 'react-router-dom';
 import { getImage } from '../../../../utils/categoryImage';
+import { PageTitle } from '../../../../components/pageTitle';
 
 export const AllCategories = () => {
   const navigate = useNavigate();
@@ -22,7 +23,7 @@ export const AllCategories = () => {
 
   return (
     <React.Fragment>
-      <h1>Categories</h1>
+      <PageTitle title='Categories' />
       <Box display='flex'>
         {categories.list.map(category => (
           <Card
