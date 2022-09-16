@@ -1,10 +1,10 @@
 {
   "files": {
-    "main.js": "/academy-market/static/js/main.25c97bd1.js",
+    "main.js": "/academy-market/static/js/main.1917c040.js",
     "index.html": "/academy-market/index.html",
-    "main.25c97bd1.js.map": "/academy-market/static/js/main.25c97bd1.js.map"
+    "main.1917c040.js.map": "/academy-market/static/js/main.1917c040.js.map"
   },
   "entrypoints": [
-    "static/js/main.25c97bd1.js"
+    "static/js/main.1917c040.js"
   ]
 }
