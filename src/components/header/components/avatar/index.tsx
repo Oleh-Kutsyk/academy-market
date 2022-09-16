@@ -11,7 +11,7 @@ import Typography from '@mui/material/Typography';
 import { useNavigate } from 'react-router-dom';
 import { ROUTES } from '../../../../core/routes/routesPath';
 
-const settings = ['Profile', 'Logout'];
+const settings = ['Profile', 'Add product', 'Logout'];
 
 interface IAvatar {
   onLogin: () => void;
@@ -31,6 +31,10 @@ export const Avatar: React.FC<IAvatar> = ({ onLogin }) => {
     }
     if (type === 'Profile') {
       navigate(ROUTES.main.profile);
+    }
+
+    if (type === 'Add product') {
+      navigate(`${ROUTES.main.allProducts}/${ROUTES.main.createProduct}`);
     }
     setAnchorElUser(null);
   };

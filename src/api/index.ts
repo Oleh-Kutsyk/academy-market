@@ -65,6 +65,14 @@ export interface IProduct {
   };
 }
 
+export interface IProductBE {
+  title: string;
+  price: string;
+  description: string;
+  category: string;
+  image: string;
+}
+
 export const getAllProducts = async (
   filters?: IProductsFilters
 ): Promise<Array<IProduct>> => {
@@ -83,6 +91,13 @@ export const getAllProductsInCategory = async (
 
 export const getSingleProduct = async (id: string): Promise<IProduct> => {
   const res = await axios.get(apiRoutes.getSingleProduct(id));
+  return res.data;
+};
+
+export const addProduct = async (body: IProductBE): Promise<IProduct> => {
+  const res = await axios.post(apiRoutes.getProducts, {
+    body,
+  });
   return res.data;
 };
 

@@ -1,9 +1,11 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import {
+  addProduct,
   getAllProducts,
   getAllProductsInCategory,
   getSingleProduct,
   IProduct,
+  IProductBE,
   IProductsFilters,
 } from '../../../api';
 
@@ -39,6 +41,12 @@ export const singleProductThunk = createAsyncThunk<IProduct, string>(
   'main/singleProduct',
   async productId => {
     return await getSingleProduct(productId);
+  }
+);
+export const addProductThunk = createAsyncThunk<IProduct, IProductBE>(
+  'main/addProduct',
+  async body => {
+    return await addProduct(body);
   }
 );
 
