@@ -17,7 +17,7 @@ export const UnauthorizedRouteContainer: React.FC<
 
   useEffect(() => {
     if (auth.isAuth) {
-      navigate(ROUTES.main.root);
+      navigate(ROUTES.main.allProducts);
     }
     if (pathname === ROUTES.auth.root) {
       navigate(ROUTES.auth.signIn);

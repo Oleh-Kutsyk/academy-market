@@ -8,6 +8,7 @@ import {
   IProductBE,
   IProductsFilters,
 } from '../../../api';
+import { addSideBar } from '../app';
 
 export interface IProducts {
   selectedProduct: IProduct | null;
@@ -45,8 +46,17 @@ export const singleProductThunk = createAsyncThunk<IProduct, string>(
 );
 export const addProductThunk = createAsyncThunk<IProduct, IProductBE>(
   'main/addProduct',
-  async body => {
-    return await addProduct(body);
+  async (body, { rejectWithValue, dispatch }) => {
+    try {
+      const res = await addProduct(body);
+      dispatch(
+        addSideBar({ message: 'Product has been created', variant: 'success' })
+      );
+      return res;
+    } catch (error: any) {
+      dispatch(addSideBar({ message: error.response.data, variant: 'error' }));
+      return rejectWithValue(error.response.data);
+    }
   }
 );
 

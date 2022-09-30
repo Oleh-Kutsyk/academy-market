@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { ILoginBody, loginApi } from '../../../api';
+import { addSideBar } from '../app';
 
 export interface IAuth {
   isAuth: boolean;
@@ -19,10 +20,19 @@ const initialState: IAuth = {
 
 export const loginThunk = createAsyncThunk<string, ILoginBody>(
   'auth/login',
-  async body => {
-    const res = await loginApi(body);
-    localStorage.setItem('token', res.token);
-    return res.token;
+  async (body, { rejectWithValue, dispatch }) => {
+    try {
+      const res = await loginApi(body);
+      localStorage.setItem('token', res.token);
+      dispatch(
+        addSideBar({ message: 'Successfully login', variant: 'success' })
+      );
+
+      return res.token;
+    } catch (error: any) {
+      dispatch(addSideBar({ message: error.response.data, variant: 'error' }));
+      return rejectWithValue(error.response.data);
+    }
   }
 );
 

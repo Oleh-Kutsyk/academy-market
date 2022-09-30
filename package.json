@@ -2,6 +2,7 @@
   "name": "market",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://oleh-kutsyk.github.io/academy-market/",
   "dependencies": {
     "@emotion/react": "^11.10.0",
     "@emotion/styled": "^11.10.0",
@@ -17,6 +18,8 @@
     "@types/react-dom": "^18.0.6",
     "@types/react-redux": "^7.1.24",
     "axios": "^0.27.2",
+    "gh-pages": "^4.0.0",
+    "notistack": "^2.0.5",
     "prettier": "^2.7.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
@@ -31,7 +34,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": [
